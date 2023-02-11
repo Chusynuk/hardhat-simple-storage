@@ -1,5 +1,7 @@
 import { ethers, run, network } from "hardhat"
 
+const ETHERSCAN_API_KEY = Boolean(process.env.ETHERSCAN_API_KEY)
+
 const main = async () => {
   const simpleStorageFactory = await ethers.getContractFactory("SimpleStorage")
 
@@ -12,7 +14,7 @@ const main = async () => {
 
   console.log("network.config", network.config)
 
-  if (network.config.chainId === 5 && process.env.ETHERSCAN_API_KEY) {
+  if (network.config.chainId === 5 && ETHERSCAN_API_KEY) {
     console.log("Waiting for blocks to be mined...")
     await simpleStorage.deployTransaction.wait(6)
     await verify(simpleStorage.address, [])

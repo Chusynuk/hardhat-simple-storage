@@ -1,31 +1,31 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.7;
+pragma solidity 0.8.17;
 
 // Uncomment this line to use console.log
 // import "hardhat/console.sol";
 
 contract SimpleStorage {
+  uint256 favoriteNumber;
+
+  mapping(string => uint256) public nameToFavoriteNumber;
+
+  struct People {
     uint256 favoriteNumber;
+    string name;
+  }
 
-    mapping(string => uint256) public nameToFavoriteNumber;
+  People[] public peopleList;
 
-    struct People {
-        uint256 favoriteNumber;
-        string name;
-    }
+  function store(uint256 _favoriteNumber) public virtual {
+    favoriteNumber = _favoriteNumber;
+  }
 
-    People[] public peopleList;
+  function retrieve() public view returns (uint256) {
+    return favoriteNumber;
+  }
 
-    function store(uint256 _favoriteNumber) public virtual {
-        favoriteNumber = _favoriteNumber;
-    }
-
-    function retrieve() public view returns (uint256) {
-        return favoriteNumber;
-    }
-
-    function addPerson(string memory _name, uint256 _favoriteNumber) public {
-        peopleList.push(People(_favoriteNumber, _name));
-        nameToFavoriteNumber[_name] = _favoriteNumber;
-    }
+  function addPerson(string memory _name, uint256 _favoriteNumber) public {
+    peopleList.push(People(_favoriteNumber, _name));
+    nameToFavoriteNumber[_name] = _favoriteNumber;
+  }
 }

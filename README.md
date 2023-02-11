@@ -12,3 +12,5 @@ npx hardhat node
 npx hardhat run scripts/deploy.js
 ```
 # hardhat-simple-storage
+
+We verify contract progamatically
